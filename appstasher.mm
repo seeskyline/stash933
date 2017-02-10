@@ -94,6 +94,8 @@ bool handleCrashReporterQuirk(NSString *appPath, NSString *stashPath){
 }
 
 bool handleTransmissionQuirk(NSString *executablePath, NSString *stashedExecutablePath){
+	NSFileManager *fileManager = [NSFileManager defaultManager];
+	
 	NSString *binaryStrings = outputFromCommand(@"/usr/bin/strings", @[executablePath]);
 	if ([binaryStrings rangeOfString:@"=======*=======*=======CSSTASHEDAPPEXECUTABLESIGNATURE=======*=======*======="].location != NSNotFound){
 		if (![[NSFileManager defaultManager] fileExistsAtPath:stashedExecutablePath]){
